@@ -89,5 +89,25 @@ public class EmployeeController {
         return Result.success(pageResult);
 
     }
+    @PostMapping("/status/{status}")
+    public Result startorstop(@PathVariable Integer status,Long id){
+        log.info("status,id: {} {}",status,id);
+       employeeService.startorstop(status,id);
+        return Result.success();
+    }
+    @GetMapping("/{id}")
+    public Result<Employee> selectbyid(@PathVariable Long id){
+        log.info("根据id查询员工信息:{}",id);
+        Employee employee= employeeService.selectbyid(id);
+        return Result.success(employee);
+    }
+
+
+    @PutMapping
+    public Result updataemployee(@RequestBody EmployeeDTO employeeDTO){
+            log.info("编辑员工:{}",employeeDTO);
+           employeeService.updataemployee(employeeDTO);
+            return Result.success();
+    }
 
 }

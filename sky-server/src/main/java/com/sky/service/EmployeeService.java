@@ -20,4 +20,10 @@ public interface EmployeeService {
     void insert(EmployeeDTO employeeDTO);
 
     PageResult selectpage(EmployeePageQueryDTO employeePageQueryDTO);
+
+    void startorstop(Integer status, Long id);
+
+    void updataemployee(EmployeeDTO employeeDTO);
+
+    Employee selectbyid(Long id);
 }
