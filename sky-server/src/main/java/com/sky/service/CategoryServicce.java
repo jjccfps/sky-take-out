@@ -17,4 +17,8 @@ public interface CategoryServicce {
     void delete(Long id);
 
     List<Category> selecttype(Integer type);
+
+    void updatastatus(Integer status,Long id);
+
+    void updatatype(CategoryDTO categoryDTO);
 }

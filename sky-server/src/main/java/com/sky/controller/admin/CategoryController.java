@@ -21,7 +21,7 @@ public class CategoryController {
    private CategoryServicce categoryServicce;
     @GetMapping("/page")
     public Result<PageResult> selectclassify(CategoryPageQueryDTO categoryPageQueryDTO){
-        log.info("分类查询:{}",categoryPageQueryDTO);
+        log.info("分类分页查询:{}",categoryPageQueryDTO);
         PageResult pageResult=categoryServicce.selectclassify(categoryPageQueryDTO);
         return  Result.success(pageResult);
 
@@ -40,9 +40,21 @@ public class CategoryController {
     }
     @GetMapping("/list")
     public Result<List<Category>> selecttype(Integer type){
-            log.info("根据");
+            log.info("根据类型查找：{}",type);
         List<Category> list=categoryServicce.selecttype(type);
         return Result.success(list);
+    }
+    @PostMapping("/status/{status}")
+    public Result upadtastatus(@PathVariable Integer status,Long id){
+        log.info("改状态；{} {}",status,id);
+        categoryServicce.updatastatus(status,id);
+        return Result.success();
+    }
+    @PutMapping
+    public Result updatatype(@RequestBody CategoryDTO categoryDTO){
+        log.info("修改:{}",categoryDTO);
+        categoryServicce.updatatype(categoryDTO);
+        return Result.success();
     }
 
 }

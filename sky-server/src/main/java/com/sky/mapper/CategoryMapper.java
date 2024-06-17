@@ -21,4 +21,8 @@ public interface CategoryMapper {
     void delete(Long id);
 
     List<Category> selecttype(Integer type);
+
+    void updatastatus(Category category);
+
+    void updatatype(Category category);
 }
