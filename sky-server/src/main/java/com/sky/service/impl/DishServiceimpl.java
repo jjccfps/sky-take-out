@@ -11,6 +11,7 @@ import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class DishServiceimpl implements DishService {
     @Override
     public PageResult selectpage(DishPageQueryDTO dishPageQueryDTO) {
       PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
-      List<Dish> list=dishMapper.selectpage(dishPageQueryDTO);
-      Page<Dish> page=(Page<Dish>) list;
+      List<DishVO> list=dishMapper.selectpage(dishPageQueryDTO);
+      Page<DishVO> page=(Page<DishVO>) list;
       return new PageResult(page.getTotal(),page.getResult());
     }
 
