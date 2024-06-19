@@ -8,6 +8,7 @@ import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -28,4 +29,18 @@ public interface DishMapper {
    @AutoFill(value = OperationType.INSERT)
 
     void insertdish(Dish dish);
+@Select("select *from dish where id=#{id}")
+    Dish selectbyid(Long id);
+@Select("select *from dish where category_id=#{categoryId}")
+    List<Dish> selectbycategoryid(Long categoryId);
+
+@Select("select count(*) from dish where id=#{id} and status=1 ")
+    int getbyid(Long id);
+
+    void deletedish(Long[] ids);
+@AutoFill(value = OperationType.UPDATE)
+    void updatadish(Dish dish);
+@AutoFill(value = OperationType.UPDATE)
+@Update("update dish set status=#{status} where id=#{id}")
+    void updatestatus(Dish dish);
 }

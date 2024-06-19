@@ -5,6 +5,42 @@
     <insert id="insertdish" useGeneratedKeys="true" keyProperty="id">
         insert into dish (name, category_id, price, image, description, create_time, update_time, create_user, update_user,status) values (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
     </insert>
+    <update id="updatadish">
+        update dish
+<set>
+    <if test="name !=null and name !=''">
+        name =#{name},
+    </if>
+    <if test="categoryId !=null ">
+        category_id =#{categoryId},
+    </if>
+    <if test="price !=null ">
+        price =#{price},
+    </if>
+    <if test="image !=null and image !=''">
+        image =#{image},
+    </if>
+    <if test="description !=null and description !=''">
+        description =#{description},
+    </if>
+
+
+    <if test="updateTime !=null ">
+        update_time =#{updateTime},
+    </if>
+
+    <if test="updateUser !=null ">
+        update_user =#{updateUser}
+    </if>
+</set>
+where id=#{id}
+    </update>
+    <delete id="deletedish">
+        delete from dish where  id in 
+<foreach collection="ids" item="id" separator="," open="(" close=")">
+    #{id}
+</foreach>
+    </delete>
 
     <select id="selectpage" resultType="com.sky.vo.DishVO">
         select d.*,c.name as categoryName from dish d left join category c on d.category_id=c.id
