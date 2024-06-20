@@ -4,4 +4,23 @@
 <mapper namespace="com.sky.mapper.StemaldishMapper">
 
 
+    <update id="updatesetmeal">
+        update setmeal_dish
+        <set>
+
+            <if test="copies !=null">
+                copies =#{copies}
+            </if>
+
+
+
+        </set>
+        where setmeal_id=#{setmealId}
+    </update>
+    <delete id="delete">
+        delete from setmeal_dish where setmeal_id in
+<foreach collection="ids" item="setmealId" separator="," close=")" open="(">
+    #{setmealId}
+</foreach>
+    </delete>
 </mapper>
