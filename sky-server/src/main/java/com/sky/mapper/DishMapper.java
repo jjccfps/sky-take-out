@@ -31,7 +31,7 @@ public interface DishMapper {
     void insertdish(Dish dish);
 @Select("select *from dish where id=#{id}")
     Dish selectbyid(Long id);
-@Select("select *from dish where category_id=#{categoryId}")
+@Select("select *from dish where category_id=#{categoryId} and status=1")
     List<Dish> selectbycategoryid(Long categoryId);
 
 @Select("select count(*) from dish where id=#{id} and status=1 ")
@@ -43,4 +43,5 @@ public interface DishMapper {
 @AutoFill(value = OperationType.UPDATE)
 @Update("update dish set status=#{status} where id=#{id}")
     void updatestatus(Dish dish);
+
 }

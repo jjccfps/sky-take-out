@@ -6,19 +6,23 @@ import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
+import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.mapper.StemaldishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.SetmealService;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +31,8 @@ public class SetmealServiceimpl implements SetmealService {
     private SetmealMapper setmealMapper;
     @Autowired
     private StemaldishMapper stemaldishMapper;
+    @Autowired
+    private DishMapper dishMapper;
     @Override
     public PageResult selectpage(SetmealPageQueryDTO setmealPageQueryDTO) {
         PageHelper.startPage(setmealPageQueryDTO.getPage(),setmealPageQueryDTO.getPageSize());
@@ -96,5 +102,28 @@ public class SetmealServiceimpl implements SetmealService {
     setmealMapper.delete(ids);
         stemaldishMapper.delete(ids);
 
+    }
+
+    @Override
+    public List<Setmeal> selectsetmeal(Setmeal setmeal) {
+        List<Setmeal> setmeals= setmealMapper.selectsetmeal(setmeal);
+        return  setmeals;
+    }
+
+    @Override
+    public List<DishItemVO> userselectsermealdish(Long id) {
+        List<SetmealDish> setmealDishes = stemaldishMapper.setmealbyid(id);
+        List<DishItemVO> dishItemVOS=new ArrayList<>();
+        for (SetmealDish setmealDish : setmealDishes) {
+            DishItemVO dishItemVO = new DishItemVO();
+            dishItemVO.setCopies(setmealDish.getCopies());
+            dishItemVO.setName(setmealDish.getName());
+            Long dishId = setmealDish.getDishId();
+            Dish dish= dishMapper.selectbyid(dishId);
+            dishItemVO.setImage(dish.getImage());
+            dishItemVO.setDescription(dish.getDescription());
+            dishItemVOS.add(dishItemVO);
+        }
+        return dishItemVOS;
     }
 }

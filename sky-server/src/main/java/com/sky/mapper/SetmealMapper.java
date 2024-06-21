@@ -11,6 +11,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 @Mapper
 public interface SetmealMapper {
 
@@ -36,4 +38,6 @@ public interface SetmealMapper {
     Integer selectbyid(String id);
 
     void delete(String[] ids);
+@Select("select *from setmeal where category_id=#{categoryId} and status=#{status}")
+    List<Setmeal> selectsetmeal(Setmeal setmeal);
 }

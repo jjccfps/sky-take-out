@@ -22,6 +22,7 @@ import org.springframework.dao.DeadlockLoserDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -119,5 +120,21 @@ public class DishServiceimpl implements DishService {
         dish.setStatus(status);
         dishMapper.updatestatus(dish);
 
+    }
+
+    @Override
+    public List<DishVO> userselectbycategoryid(Long categoryId) {
+        List<DishVO> list=new ArrayList<>();
+
+        List<Dish> dishes=dishMapper.selectbycategoryid(categoryId);
+        for (Dish dish : dishes) {
+            DishVO dishVO = new DishVO();
+            Long id = dish.getId();
+            List<DishFlavor> flavors = dishFlavorMapper.selectbyid(id);
+            dishVO.setFlavors(flavors);
+            BeanUtils.copyProperties(dish,dishVO);
+            list.add(dishVO);
+        }
+return list;
     }
 }
