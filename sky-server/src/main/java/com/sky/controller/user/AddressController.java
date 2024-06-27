@@ -36,9 +36,9 @@ public class AddressController {
         return Result.success(addressBook);
     }
     @PutMapping("/default")
-    public Result updatedefault(Long id){
-        log.info("设置默认地址:{}",id);
-        addressService.updatedefault(id);
+    public Result updatedefault(@RequestBody AddressBook addressBook){
+        log.info("设置默认地址:{}",addressBook);
+        addressService.updatedefault(addressBook);
         return Result.success();
     }
     @GetMapping("default")

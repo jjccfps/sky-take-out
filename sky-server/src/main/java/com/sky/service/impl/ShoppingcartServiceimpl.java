@@ -27,7 +27,8 @@ public class ShoppingcartServiceimpl implements ShoppingcartService {
 
     @Override
     public List<ShoppingCart> getcart() {
-        return shoppingcartMapper.getcart();
+        Long userId = BaseContext.getCurrentId();
+        return shoppingcartMapper.getcart(userId);
     }
 
     @Override
@@ -75,7 +76,8 @@ public class ShoppingcartServiceimpl implements ShoppingcartService {
 
     @Override
     public void cleanall() {
-        shoppingcartMapper.cleanall();
+        Long userId = BaseContext.getCurrentId();
+        shoppingcartMapper.cleanall(userId);
     }
 
     @Override

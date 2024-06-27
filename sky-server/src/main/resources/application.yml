@@ -52,4 +52,5 @@ sky:
   wechat:
     appid: ${sky.weichat.appid}
     secret: ${sky.weichat.secret}
+    notify-url: ${sky.weichat.notifyurl}
 

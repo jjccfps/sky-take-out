@@ -32,17 +32,18 @@ public class AddressServiceimpl implements AddressService {
     }
 
     @Override
-    public void updatedefault(Long id) {
+    public void updatedefault(AddressBook addressBook) {
         //先判断原来有没有默认地址，有就修改为不是默认，没有直接设置默认
         Integer enable = StatusConstant.ENABLE;
-        AddressBook addressBook= addressMapper.selectdefault(enable);
+        AddressBook addressBook1= addressMapper.selectdefault(enable);
         //判断
         if (addressBook !=null){
             //修改为不是默认
-            addressBook.setIsDefault(StatusConstant.DISABLE);
-            addressMapper.updatedefault(addressBook);
+            addressBook1.setIsDefault(StatusConstant.DISABLE);
+            addressMapper.updatedefault(addressBook1);
         }
-        addressMapper.setdefault(enable,id);
+        addressBook.setIsDefault(enable);
+        addressMapper.setdefault(addressBook);
     }
 
     @Override

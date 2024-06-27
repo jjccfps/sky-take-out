@@ -19,7 +19,7 @@ public interface AddressMapper {
 @Update("update address_book set is_default=#{isDefault} where id=#{id} ")
     void updatedefault(AddressBook addressBook);
 @Update("update address_book set is_default=#{isDefault} where id=#{id}")
-    void setdefault(Integer isDefault, Long id);
+    void setdefault(AddressBook addressBook);
 @Select("select * from address_book where is_default=#{isDefault}")
     AddressBook getdefault(Integer isDefault);
 @Update("update address_book set consignee=#{consignee}, sex=#{sex}, phone=#{phone}, province_code=#{provinceCode},province_name=#{provinceName},city_code=#{cityCode},city_name=#{cityName},district_code=#{districtCode},district_name=#{districtName},detail=#{detail},label=#{label} where id=#{id} ")
