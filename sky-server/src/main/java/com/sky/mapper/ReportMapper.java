@@ -23,9 +23,9 @@ public interface ReportMapper {
     @Select("select count(*) from orders where order_time between #{beginTime} and #{endTime} and status=#{status}")
     Integer dateordercomplete(Map map);
     @Select("select count(*) from orders ")
-    List<Integer> tatalorders();
+    Integer tatalorders();
     @Select("select count(*) from orders where status=#{status}")
-    List<Integer> totalordercomplete(Integer status);
+    Integer totalordercomplete(Integer status);
 @Select("select id  from orders where order_time between #{beginTime} and #{endTime}")
     List<Integer> top10orderid(LocalDateTime beginTime, LocalDateTime endTime);
 

@@ -123,22 +123,17 @@ public class ReportServiceimpl implements ReportService {
         orderReportVO.setOrderCountList(useramounts);
         orderReportVO.setDateList(listdate);
         //总订单
-        List<Integer> totalorders=reportMapper.tatalorders();
-        String total = StringUtils.join(totalorders, ",");
-        if (total!=null){
-            Integer totals = Integer.valueOf(total);
+        Integer totals=reportMapper.tatalorders();
             orderReportVO.setTotalOrderCount(totals);
-        }else {
-            orderReportVO.setTotalOrderCount(null);
-        }
-        List<Integer> totalordercomplete=reportMapper.totalordercomplete(Orders.COMPLETED);
-        String totalcomplete = StringUtils.join(totalordercomplete, ",");
-        if (total!=null){
-            Integer totalcompletes  = Integer.valueOf(totalcomplete);
+        int total = totals.intValue();
+        Integer totalcompletes=reportMapper.totalordercomplete(Orders.COMPLETED);
             orderReportVO.setValidOrderCount(totalcompletes);
-        }else {
-            orderReportVO.setValidOrderCount(null);
-        }
+        int totalcomplete = totalcompletes.intValue();
+
+
+        double ordercoplete=totalcomplete / total;
+        Double aDouble = new Double(ordercoplete);
+        orderReportVO.setOrderCompletionRate(aDouble);
         return orderReportVO;
     }
 
