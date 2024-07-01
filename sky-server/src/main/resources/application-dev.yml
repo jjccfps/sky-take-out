@@ -12,7 +12,3 @@ sky:
     password: 123456
     host: localhost
     database: 0
-  wechat:
-    appid: wx4def69e821811987
-    secret: f9f9eddc6252eba2baf73ea6ced6a8d5
-    notifyurl: http://3e6a933c.r27.cpolar.top/notify/paysuccess
